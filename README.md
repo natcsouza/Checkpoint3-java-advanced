@@ -2,9 +2,9 @@
 
 ## Integrantes
 
-- Natalia Cristina de Souza - RM 564099
-- Nickolas Davi Silva Souza - RM 564105
-- Samara de Oliveira Vilela - RM 566133
+- Natalia Cristina de Souza - RM: 564099
+- Nickolas Davi Silva Souza - RM: 564105
+- Samara de Oliveira Vilela - RM: 566133
 - Rodrigo Carvalho Silva - RM: 565162
 
 ---

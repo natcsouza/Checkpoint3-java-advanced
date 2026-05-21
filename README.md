@@ -90,8 +90,8 @@ Configuração utilizada:
 
 ```properties
 spring.datasource.url=
-spring.datasource.username=
-spring.datasource.password=
+spring.datasource.username= SEU_USUARIO
+spring.datasource.password= SUA_SENHA
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true

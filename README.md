@@ -132,6 +132,16 @@ Exemplos:
 
 As validações foram executadas automaticamente durante operações POST e PUT.
 
+Foi utilizado Validation Beans para garantir integridade e validação automática dos dados recebidos pela API.
+
+Exemplos aplicados:
+- @NotBlank → impede campos vazios
+- @NotNull → impede valores nulos
+- @Positive → garante valores positivos
+- @Valid → executa validações automaticamente nos endpoints POST e PUT
+
+As validações são processadas pelo Spring Boot antes da persistência no banco Oracle, reduzindo inconsistências e aumentando confiabilidade dos dados.
+
 ---
 
 # Swagger OpenAPI

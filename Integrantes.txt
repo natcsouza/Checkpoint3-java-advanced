@@ -1,0 +1,90 @@
+====================================================
+        CHECKPOINT 3 - JAVA ADVANCED
+====================================================
+
+Turma: 2TDSR - FIAP
+Projeto: API REST de Brinquedos - Spring Boot com Persistência, Repository, Validation e Swagger
+
+----------------------------------------------------
+INTEGRANTES
+----------------------------------------------------
+
+Nome: Natalia Cristina de Souza
+RM: 564099
+
+Nome: Nickolas Davi Silva Souza
+RM: 564105
+
+Nome: Samara de Oliveira Vilela
+RM: 566133
+
+Nome: Rodrigo Carvalho Silva
+RM: 565162
+
+----------------------------------------------------
+TECNOLOGIAS UTILIZADAS
+----------------------------------------------------
+
+- Java 21
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Oracle Database
+- Spring Validation Beans
+- Swagger / OpenAPI
+- Maven
+- Postman / Swagger UI
+- IntelliJ IDEA
+- Tomcat (localhost:8080)
+
+----------------------------------------------------
+FUNCIONALIDADES IMPLEMENTADAS
+----------------------------------------------------
+
+[OK] Cadastro de brinquedos (POST)
+[OK] Listagem de brinquedos (GET)
+[OK] Consulta de brinquedo por ID (GET/{id})
+[OK] Atualização de brinquedos (PUT)
+[OK] Exclusão de brinquedos (DELETE)
+
+[OK] Persistência Oracle Database
+[OK] Repository com JpaRepository
+[OK] Validation Beans
+[OK] Swagger para documentação e testes
+[OK] Testes HTTP localhost:8080
+[OK] Estrutura JSON para operações CRUD
+
+----------------------------------------------------
+ESTRUTURA DO PROJETO
+----------------------------------------------------
+
+controller/
+Endpoints REST da aplicação
+
+model/
+Entity Brinquedo
+
+repository/
+JpaRepository para persistência
+
+service/
+Regras de negócio e integração
+
+resources/
+application.properties
+
+----------------------------------------------------
+OBSERVAÇÕES
+----------------------------------------------------
+
+Projeto desenvolvido utilizando API REST integrada
+ao banco Oracle Database com persistência via JPA.
+
+Os testes de CRUD foram realizados utilizando
+Swagger UI e localhost:8080 conforme solicitado.
+
+A documentação completa, imagens, diagramas,
+explicações técnicas e exemplos JSON encontram-se
+no ReadMe do GitHub.
+
+====================================================

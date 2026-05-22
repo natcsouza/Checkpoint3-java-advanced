@@ -13,7 +13,7 @@
 
 Projeto desenvolvido em Java utilizando Spring Boot para criação de uma API REST de gerenciamento de brinquedos para crianças até 14 anos.
 
-A aplicação realiza operações de CRUD integradas ao banco Oracle Database, utilizando persistência com Spring Data JPA, Validation Beans e documentação/testes através do Swagger OpenAPI.
+A aplicação realiza operações de CRUD integradas ao banco Oracle Database, utilizando persistência com Spring Data JPA, Validation Beans, Swagger OpenAPI e testes via Swagger UI e Postman.
 
 ---
 
@@ -24,26 +24,20 @@ A aplicação realiza operações de CRUD integradas ao banco Oracle Database, u
 - Spring Web
 - Spring Data JPA
 - Validation Beans
-- Swagger / OpenAPI
+- Swagger OpenAPI
 - Oracle Database
 - Maven
 - IntelliJ IDEA
 - Oracle SQL Developer
 - Swagger UI
+- Postman
 - Apache Tomcat (localhost:8080)
 
 ---
 
 # Estrutura do Projeto
 
-O projeto foi organizado utilizando arquitetura em camadas:
-
-- Controller
-- Service
-- Repository
-- Model
-
-Pacotes principais:
+Arquitetura em camadas:
 
 ```text
 controller
@@ -57,15 +51,15 @@ resources
 
 # Banco de Dados
 
-Banco Oracle utilizado para persistência dos dados.
+Banco Oracle utilizado para persistência.
 
-Tabela utilizada:
+Tabela:
 
 ```sql
 TDS_TB_BRINQUEDOS
 ```
 
-Colunas obrigatórias:
+Colunas:
 
 ```text
 ID
@@ -86,12 +80,12 @@ Arquivo:
 application.properties
 ```
 
-Configuração utilizada:
+Exemplo:
 
 ```properties
 spring.datasource.url=
-spring.datasource.username= SEU_USUARIO
-spring.datasource.password= SUA_SENHA
+spring.datasource.username=SEU_USUARIO
+spring.datasource.password=SUA_SENHA
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
@@ -103,17 +97,16 @@ Persistência realizada utilizando Spring Data JPA.
 
 # Repository
 
-Foi utilizado Repository através da interface:
+Foi utilizado:
 
 ```java
 JpaRepository<Brinquedo, Long>
 ```
 
-A utilização do JpaRepository permite:
+Benefícios:
 
-- Inserção de registros
-- Consulta por ID
-- Consulta geral
+- Inserção
+- Consulta
 - Atualização
 - Exclusão
 - Persistência simplificada
@@ -122,37 +115,30 @@ A utilização do JpaRepository permite:
 
 # Validation Beans
 
-Foram aplicadas validações utilizando Validation Beans nos atributos da entidade Brinquedo.
+Foram utilizadas validações automáticas:
 
-Exemplos:
+```java
+@NotBlank
+@NotNull
+@Positive
+@Valid
+```
 
-- Campos obrigatórios
-- Validação de valores
-- Controle de integridade dos dados
+Objetivos:
 
-As validações foram executadas automaticamente durante operações POST e PUT.
-
-Foi utilizado Validation Beans para garantir integridade e validação automática dos dados recebidos pela API.
-
-Exemplos aplicados:
-- @NotBlank → impede campos vazios
-- @NotNull → impede valores nulos
-- @Positive → garante valores positivos
-- @Valid → executa validações automaticamente nos endpoints POST e PUT
-
-As validações são processadas pelo Spring Boot antes da persistência no banco Oracle, reduzindo inconsistências e aumentando confiabilidade dos dados.
+- Impedir campos vazios
+- Impedir valores inválidos
+- Garantir integridade dos dados
 
 ---
 
 # Swagger OpenAPI
 
-Foi implementado Swagger OpenAPI para documentação e realização dos testes dos endpoints.
-
 Dependência utilizada:
 
 ```xml
 <dependency>
-    <groupId>org.springdoc</groupId>
+<groupId>org.springdoc</groupId>
 
 <artifactId>
 springdoc-openapi-starter-webmvc-ui
@@ -163,7 +149,7 @@ springdoc-openapi-starter-webmvc-ui
 </dependency>
 ```
 
-Acesso realizado através:
+Acesso:
 
 ```http
 http://localhost:8080/swagger-ui/index.html
@@ -171,143 +157,153 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
+# Arquitetura Utilizada
+
+```text
+Swagger UI / Postman
+        ↓
+HTTP JSON
+        ↓
+Controller
+        ↓
+Service
+        ↓
+Repository (JpaRepository)
+        ↓
+Oracle Database
+(TDS_TB_BRINQUEDOS)
+```
+
+<img width="1692" height="929" alt="Diagrama de arquitetura" src="https://github.com/user-attachments/assets/40f99f40-020f-4041-bdb2-50a50eb8273d" />
+
+---
+
 # Operações CRUD
 
-Foram realizados testes completos utilizando Swagger UI contemplando:
-
-CREATE
+Endpoints:
 
 ```http
 POST /brinquedos
-```
-
-READ GERAL
-
-```http
 GET /brinquedos
-```
-
-READ POR ID
-
-```http
 GET /brinquedos/{id}
-```
-
-UPDATE
-
-```http
 PUT /brinquedos/{id}
-```
-
-DELETE
-
-```http
 DELETE /brinquedos/{id}
 ```
 
-Todos os testes foram realizados utilizando:
+---
 
-```http
-localhost:8080
-```
+# Swagger UI
+
+<img width="1920" height="1001" alt="Swagger funcionando" src="https://github.com/user-attachments/assets/05b1c2fc-c8a0-4405-bfda-b0a68f160f78" />
 
 ---
 
-# Exemplo JSON POST
+# CRUD - POST
+
+JSON utilizado:
 
 ```json
 {
- "nome":"Lego Minecraft",
- "tipo":"Blocos",
- "classificacao":"8 anos",
- "tamanho":"Médio",
- "preco":199.90
+"nome":"Carrinho Hot Wheels",
+"tipo":"Carrinho",
+"classificacao":"5 anos",
+"tamanho":"Pequeno",
+"preco":59.90
 }
 ```
 
+<img width="1920" height="992" alt="CRUD POST funcionando" src="https://github.com/user-attachments/assets/1c9d9e07-5132-4e67-9e26-6ac4dacf1586" />
+
+<img width="1919" height="1043" alt="Postman - Método POST Create" src="https://github.com/user-attachments/assets/057c302b-79fb-4279-9bb7-da6d23694a03" />
+
 ---
 
-# Exemplo JSON PUT
+# CRUD - GET GERAL
+
+<img width="1918" height="998" alt="CRUD GET LIST funcionando" src="https://github.com/user-attachments/assets/5b050173-281e-47ac-8a38-8eef343eaf31" />
+<img width="1920" height="1041" alt="Postman - Método GET LIST geral" src="https://github.com/user-attachments/assets/fdd2151b-e3d5-4bd1-a7fe-b545198f0ce1" />
+
+---
+
+# CRUD - GET POR ID
+
+<img width="1917" height="995" alt="CRUD GET ID funcionando" src="https://github.com/user-attachments/assets/39c4fafd-568f-4f29-bf09-dbc13998769c" />
+<img width="1920" height="1042" alt="Postman - Método GET ID" src="https://github.com/user-attachments/assets/df5bc3c8-badb-4516-be0e-496a2d22fc4c" />
+
+---
+
+# CRUD - PUT
+
+JSON utilizado:
 
 ```json
 {
- "nome":"Lego Minecraft Deluxe",
- "tipo":"Blocos",
- "classificacao":"10 anos",
- "tamanho":"Grande",
- "preco":249.90
+"nome":"Carrinho Hot Wheels Deluxe",
+"tipo":"Carrinho",
+"classificacao":"6 anos",
+"tamanho":"Grande",
+"preco":79.90
 }
 ```
 
----
-
-# Evidências Implementadas
-
-## Swagger UI
-
-- CRUD funcionando
-- GET por ID
-- DELETE
-- Retorno 404 após exclusão
-- Documentação automática
+<img width="1920" height="997" alt="CRUD PUT funcionando" src="https://github.com/user-attachments/assets/e38aaebb-0d52-487e-af9e-5679c512b556" />
+<img width="1920" height="1043" alt="Postman - Método PUT Update" src="https://github.com/user-attachments/assets/4900cc8e-2960-46fe-a58e-be5acdfa1434" />
 
 ---
 
-## Oracle SQL Developer
+# CRUD - DELETE
 
-Comandos utilizados:
+<img width="1920" height="996" alt="CRUD DELETE funcionando" src="https://github.com/user-attachments/assets/cc1a0d24-44ff-42b3-958f-f8b071686c23" />
+<img width="1920" height="1041" alt="Postman - Método DELETE" src="https://github.com/user-attachments/assets/003f4ce8-457b-476a-827b-06c8e5621b1d" />
+
+---
+
+# Evidência Exclusão
+
+<img width="1920" height="997" alt="CRUD GET ID após DELETE" src="https://github.com/user-attachments/assets/9a67ff5b-0f20-46d4-b87e-17c840dd8629" />
+<img width="1920" height="1040" alt="Postman - Método GET ID depois do DELETE" src="https://github.com/user-attachments/assets/d845bff9-1861-44e6-b53c-7771fbf79b3b" />
+
+---
+
+# Oracle SQL Developer
+
+Comando:
 
 ```sql
 DESC TDS_TB_BRINQUEDOS;
 ```
 
+<img width="1918" height="1038" alt="Estrutura da tabela DESC - ORACLE SQL DEVELOPER" src="https://github.com/user-attachments/assets/7e20fd99-6b91-447b-90f3-17aec8b00def" />
+
+---
+
+Comando:
+
 ```sql
 SELECT * FROM TDS_TB_BRINQUEDOS;
 ```
 
----
-
-## Spring Initializr
-
-Projeto criado utilizando:
-
-- Maven
-- Java
-- Spring Web
-- Spring Data JPA
-- Validation
-- Oracle Driver
+<img width="1916" height="1040" alt="Dados persistidos no banco SELECT - ORACLE SQL DEVELOPER" src="https://github.com/user-attachments/assets/042ee94f-550e-4e0f-9f85-bb3b46622e90" />
 
 ---
 
-## IDE Utilizada
+# IntelliJ IDEA
 
-IntelliJ IDEA
+Aplicação executando:
+
+<img width="1920" height="1045" alt="Aplicação rodando no terminal IntelliJ 1" src="https://github.com/user-attachments/assets/767a1086-af9a-4146-a1b6-cda7a30d8d21" />
+<img width="1920" height="1044" alt="Aplicação rodando no terminal IntelliJ 2" src="https://github.com/user-attachments/assets/0b7230fc-7ed1-495e-b9c0-62f8036c0987" />
+<img width="1920" height="1043" alt="Aplicação rodando no terminal IntelliJ 3" src="https://github.com/user-attachments/assets/cfd79a57-6573-4cfd-adb8-6fb69385d9a7" />
 
 ---
 
-# Arquitetura Utilizada
+# Spring Initializr
 
-```text
-Swagger UI
-      |
-HTTP JSON
-      |
-Controller
-      |
-Service
-      |
-Repository (JpaRepository)
-      |
-Oracle Database
-(TDS_TB_BRINQUEDOS)
-```
+<img width="1917" height="997" alt="Spring Initializr" src="https://github.com/user-attachments/assets/92859d47-1d9f-440a-a171-c24f10e78c3a" />
 
 ---
 
 # Repositório GitHub
-
-Link do projeto:
 
 ```text
 https://github.com/natcsouza/Checkpoint3-java-advanced
